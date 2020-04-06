@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthorizedComponent } from './authorized/authorized.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthorizedComponent
   ],
   imports: [
     BrowserModule,

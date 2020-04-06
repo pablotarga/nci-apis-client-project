@@ -1,4 +1,8 @@
-<h1>
-  {{title}} -
-  <fa-icon [icon]="faCoffee"></fa-icon>
-</h1>
+<h1>{{title}}</h1>
+<h2 class="text-muted">{{subtitle}}</h2>
+
+<app-authorized *ngIf="s.customer; else authComponents"></app-authorized>
+
+<ng-template #authComponents>
+  Must <a href="#" (click)="toggleCustomer()">login</a> or register.
+</ng-template>
