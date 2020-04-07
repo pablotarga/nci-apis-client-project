@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SystemService } from '../services/system.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     return this.showInvalidControl(this.password);
   }
 
-  private showInvalidControl(e): boolean {
+  private showInvalidControl(e: FormControl): boolean {
     return e.invalid && (e.dirty || e.touched);
   }
 
