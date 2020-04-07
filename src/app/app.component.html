@@ -1,8 +1,19 @@
-<h1>{{title}}</h1>
-<h2 class="text-muted">{{subtitle}}</h2>
+<div class="row">
+  <div class="col-12 mb-3">
+    <h1>{{title}}</h1>
+    <h2 class="text-muted">{{subtitle}}</h2>
+  </div>
+</div>
 
 <app-authorized *ngIf="s.customer; else authComponents"></app-authorized>
 
 <ng-template #authComponents>
-  Must <a href="#" (click)="login()">login</a> or register.
+  <div class="row">
+    <div class="col-6">
+      <app-login></app-login>
+    </div>
+    <div class="col-6">
+      <app-register></app-register>
+    </div>
+  </div>
 </ng-template>

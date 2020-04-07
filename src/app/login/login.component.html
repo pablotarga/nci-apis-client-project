@@ -1,0 +1,25 @@
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Login</h5>
+    <form [formGroup]="form" (submit)="s.login(form.value)">
+
+      <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" formControlName="email" class="form-control" [class.is-invalid]="emailIsInvalid">
+        <div *ngIf="emailIsInvalid && email.errors.required" class="invalid-feedback">Email is required.</div>
+        <div *ngIf="emailIsInvalid && !email.errors.required" class="invalid-feedback">Invalid Email format.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" formControlName="password" class="form-control" [class.is-invalid]="passwordIsInvalid">
+        <div *ngIf="passwordIsInvalid && password.errors.required" class="invalid-feedback">Password is required.</div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Login" class="btn btn-primary" [disabled]="s.authenticating || this.form.invalid" />
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { SystemService } from './system.service';
+import { SystemService } from './services/system.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +11,4 @@ export class AppComponent {
   constructor(public s: SystemService) { }
   title = 'NCI API CA3';
   subtitle = 'Bank Account HtmlClient';
-  faCoffee = faCoffee;
-
-
-  login() {
-    this.s.login({
-      address: '25 Talbot St',
-      email: 'john@student.ncirl.ie',
-      id: 1,
-      name: 'John Doe',
-      password: 'Yjk5d53JESdHv5k/rI6Tq/wSkHY=.1GwRmuF4kNs='
-    });
-  }
 }
