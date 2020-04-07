@@ -4,5 +4,5 @@
 <app-authorized *ngIf="s.customer; else authComponents"></app-authorized>
 
 <ng-template #authComponents>
-  Must <a href="#" (click)="toggleCustomer()">login</a> or register.
+  Must <a href="#" (click)="login()">login</a> or register.
 </ng-template>

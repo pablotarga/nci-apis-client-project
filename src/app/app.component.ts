@@ -15,18 +15,13 @@ export class AppComponent {
   faCoffee = faCoffee;
 
 
-  toggleCustomer() {
-    if (this.s.customer) {
-      this.s.logout();
-    } else {
-      this.s.login({
-        address: '25 Talbot St',
-        email: 'john@student.ncirl.ie',
-        id: 1,
-        name: 'John Doe',
-        password: 'Yjk5d53JESdHv5k/rI6Tq/wSkHY=.1GwRmuF4kNs='
-      });
-    }
-
+  login() {
+    this.s.login({
+      address: '25 Talbot St',
+      email: 'john@student.ncirl.ie',
+      id: 1,
+      name: 'John Doe',
+      password: 'Yjk5d53JESdHv5k/rI6Tq/wSkHY=.1GwRmuF4kNs='
+    });
   }
 }
