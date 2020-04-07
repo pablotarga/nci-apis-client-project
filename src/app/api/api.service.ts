@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  private REST_SERVER = 'http://localhost:49000/api/';
 
   constructor(protected httpClient: HttpClient) { }
 
@@ -15,5 +14,5 @@ export class ApiService {
   protected get = (path: string, params?: any) => this.httpClient.get(this.getUrl(path), { params });
   protected delete = (path: string) => this.httpClient.delete(this.getUrl(path), {});
 
-  private getUrl = (path: string) => this.REST_SERVER + path;
+  private getUrl = (path: string) => environment.host + path;
 }

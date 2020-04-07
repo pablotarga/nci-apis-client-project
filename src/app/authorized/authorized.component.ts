@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SystemService } from '../system.service';
+import { SystemService } from '../services/system.service';
 
 @Component({
   selector: 'app-authorized',
