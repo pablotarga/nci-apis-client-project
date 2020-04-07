@@ -3,9 +3,9 @@
 https://github.com/trion-development/docker-ng-cli
 
 
-docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli ng serve --host 0.0.0.0 --disableHostCheck
-docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli ng build
-docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli ng generate component login
+* docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli ng serve --host 0.0.0.0 --disableHostCheck
+* docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli ng build
+* docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli ng generate component login
 
 
 # Client
