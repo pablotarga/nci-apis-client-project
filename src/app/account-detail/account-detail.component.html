@@ -1,0 +1,15 @@
+<div class="card v-100 shadow mb-5">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h5 class="card-title">
+        {{account.title}}<br />
+        <small>{{account.sortCode}}</small>
+        <small class="ml-2">{{account.number}}</small>
+      </h5>
+      <fa-icon icon="times" (click)="s.activeAccount = null"></fa-icon>
+    </div>
+
+    <span class="totals">{{account.balance | currency : 'EUR' }}</span>
+  </div>
+
+</div>

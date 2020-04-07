@@ -1,0 +1,8 @@
+<div class="account-row d-flex justify-content-between align-items-center py-4">
+  <div>
+    {{account.title}}<br />
+    <small class="text-muted">{{account.sortCode}}</small>
+    <small class="text-muted ml-2">{{account.number}}</small>
+  </div>
+  <div class="balance">{{account.balance | currency : 'EUR'}}</div>
+</div>

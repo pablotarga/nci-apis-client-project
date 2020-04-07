@@ -1,0 +1,21 @@
+.account-row{
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  &, .text-muted{
+    transition: background-color .3s ease, color .3s ease, border-bottom .3s ease;
+  }
+
+  &:hover{
+    background-color: #8fbc8f;
+    border-bottom: 1px solid #759675;
+
+    // #9ec37c
+    color: white;
+    .text-muted{
+      color: white!important;
+    }
+  }
+}

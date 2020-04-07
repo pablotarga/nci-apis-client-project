@@ -1,16 +1,17 @@
 <div class="row">
-  <div class="col-3">
+  <div class="col-md-5 col-lg-3">
     <app-customer-info></app-customer-info>
   </div>
 
-  <div class="col-9">
-    <div class="card v-100 shadow">
-      <div class="card-body">
-        <h5 class="card-title">Accounts</h5>
-
+  <div class="col-md-7 col-lg-9 mt-4 mt-md-0">
+    <div class="flip-card" [class.flipped]="s.activeAccount">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <app-account-list></app-account-list>
+        </div>
+        <div class="flip-card-back">
+          <app-account-detail [account]=s.activeAccount></app-account-detail>
+        </div>
       </div>
 
     </div>
-  </div>
-
-</div>

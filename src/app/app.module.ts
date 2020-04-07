@@ -11,6 +11,9 @@ import { AuthorizedComponent } from './authorized/authorized.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { AccountRowComponent } from './account-row/account-row.component';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { AccountListComponent } from './account-list/account-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
     AuthorizedComponent,
     LoginComponent,
     RegisterComponent,
-    CustomerInfoComponent
+    CustomerInfoComponent,
+    AccountRowComponent,
+    AccountDetailComponent,
+    AccountListComponent
   ],
   imports: [
     BrowserModule,
