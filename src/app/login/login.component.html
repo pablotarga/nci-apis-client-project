@@ -5,15 +5,15 @@
 
       <div class="form-group">
         <label for="">Email</label>
-        <input type="text" formControlName="email" class="form-control" [class.is-invalid]="emailIsInvalid">
-        <div *ngIf="emailIsInvalid && email.errors.required" class="invalid-feedback">Email is required.</div>
-        <div *ngIf="emailIsInvalid && !email.errors.required" class="invalid-feedback">Invalid Email format.</div>
+        <input type="text" formControlName="email" class="form-control" [class.is-invalid]="isEmailInvalid">
+        <div *ngIf="isEmailInvalid && email.errors.required" class="invalid-feedback">Email is required.</div>
+        <div *ngIf="isEmailInvalid && !email.errors.required" class="invalid-feedback">Invalid Email format.</div>
       </div>
 
       <div class="form-group">
         <label for="">Password</label>
-        <input type="password" formControlName="password" class="form-control" [class.is-invalid]="passwordIsInvalid">
-        <div *ngIf="passwordIsInvalid && password.errors.required" class="invalid-feedback">Password is required.</div>
+        <input type="password" formControlName="password" class="form-control" [class.is-invalid]="isPasswordInvalid">
+        <div *ngIf="isPasswordInvalid && password.errors.required" class="invalid-feedback">Password is required.</div>
       </div>
 
       <div class="form-group">

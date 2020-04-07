@@ -1,1 +1,43 @@
-<p>register works!</p>
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">New Customer</h5>
+    <form [formGroup]="form" (submit)="s.register(form.value)">
+
+      <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" formControlName="name" class="form-control" [class.is-invalid]="isNameInvalid">
+        <div *ngIf="isNameInvalid && name.errors.required" class="invalid-feedback">Name is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Sort Code</label>
+        <input type="text" formControlName="sortCode" class="form-control" [class.is-invalid]="isSortCodeInvalid">
+        <div *ngIf="isSortCodeInvalid && sortCode.errors.required" class="invalid-feedback">Sort Code is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Address</label>
+        <input type="text" formControlName="address" class="form-control" [class.is-invalid]="isAddressInvalid">
+        <div *ngIf="isAddressInvalid && address.errors.required" class="invalid-feedback">Address is required.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" formControlName="email" class="form-control" [class.is-invalid]="isEmailInvalid">
+        <div *ngIf="isEmailInvalid && email.errors.required" class="invalid-feedback">Email is required.</div>
+        <div *ngIf="isEmailInvalid && !email.errors.required" class="invalid-feedback">Invalid Email format.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" formControlName="password" class="form-control" [class.is-invalid]="isPasswordInvalid">
+        <div *ngIf="isPasswordInvalid && password.errors.required" class="invalid-feedback">Password is required.</div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Create Account" class="btn btn-primary" [disabled]="s.authenticating || this.form.invalid" />
+      </div>
+
+    </form>
+  </div>
+</div>

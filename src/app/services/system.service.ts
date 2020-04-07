@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiAuthService } from '../api/api-auth.service';
+import { LoginForm } from '../interfaces/login-form';
+import { RegistrationForm } from '../interfaces/registration-form';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,13 @@ export class SystemService {
 
   constructor(
     private authApi: ApiAuthService
-  ) {
-  }
+  ) { }
 
-  login = (data: { email: string, password: string }) => {
+  login = (data: LoginForm) => {
+    if (this.authenticating) {
+      return;
+    }
+
     this.authenticating = true;
     this.clearAll();
 
@@ -33,7 +38,29 @@ export class SystemService {
     });
   }
 
+  register = (data: RegistrationForm) => {
+    if (this.authenticating) {
+      return;
+    }
+
+    this.authenticating = true;
+    this.clearAll();
+
+    this.authApi.register(data).subscribe((e) => {
+      this.customer = e;
+      this.loadAccounts();
+      this.authenticating = false;
+    }, (err) => {
+      if (err.status === 0) {
+        this.mock();
+      }
+
+      this.authenticating = false;
+    })
+  }
+
   logout = () => {
+    this.authApi.logout().subscribe(e => console.log('Logged out!'));
     this.clearAll();
   }
 

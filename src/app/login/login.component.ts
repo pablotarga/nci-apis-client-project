@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   get email(): any { return this.form.get('email'); }
-  get emailIsInvalid(): any {
+  get isEmailInvalid(): any {
     const e = this.email;
     return e.invalid && (e.dirty || e.touched);
   }
 
   get password(): any { return this.form.get('password'); }
-  get passwordIsInvalid(): any {
+  get isPasswordInvalid(): any {
     const e = this.password;
     return e.invalid && (e.dirty || e.touched);
   }
