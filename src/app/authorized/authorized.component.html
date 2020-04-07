@@ -1,31 +1,13 @@
 <div class="row">
   <div class="col-3">
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Hi, {{s.customer.name}}!</h5>
-        <p class="card-text text-muted">
-          <fa-icon icon="envelope" [fixedWidth]="true"></fa-icon>
-          {{s.customer.email}}<br />
-          <fa-icon icon="id-card" [fixedWidth]="true"></fa-icon>
-          {{(""+s.customer.id).padStart(5, '0')}}<br />
-          <fa-icon icon="map-marker-alt" [fixedWidth]="true"></fa-icon>
-          {{s.customer.address}}<br />
-        </p>
-        <a href="#" class="card-link text-danger" (click)="s.logout()">
-          <fa-icon icon="power-off" [fixedWidth]="true"></fa-icon>
-          Logout
-        </a>
-
-      </div>
-    </div>
-
+    <app-customer-info></app-customer-info>
   </div>
 
   <div class="col-9">
-    <div class="card v-100">
+    <div class="card v-100 shadow">
       <div class="card-body">
         <h5 class="card-title">Accounts</h5>
+
       </div>
 
     </div>

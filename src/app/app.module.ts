@@ -10,13 +10,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { AuthorizedComponent } from './authorized/authorized.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CustomerInfoComponent } from './customer-info/customer-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthorizedComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CustomerInfoComponent
   ],
   imports: [
     BrowserModule,
