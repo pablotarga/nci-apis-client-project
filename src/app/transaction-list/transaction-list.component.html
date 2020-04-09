@@ -1,0 +1,19 @@
+<div class="account-row d-flex justify-content-between align-items-center py-2" *ngFor="let entry of account.transactions">
+  <div>
+    {{entry.description}}<br />
+    <small class="text-white">{{entry.created | date : 'short' }}</small>
+  </div>
+  <div class="text-right">
+    <span class="balance">
+      <span>{{entry.type == 'c' ? '+' : '-'}}</span>
+      <span>{{entry.amount | currency : 'EUR'}}</span>
+      <br />
+    </span>
+    <small>{{entry.postBalance | currency : 'EUR'}}</small>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center py-2">
+  <div>&nbsp;</div>
+  <div class="totals">{{account.balance | currency : 'EUR'}}</div>
+</div>

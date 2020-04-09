@@ -14,6 +14,7 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { AccountRowComponent } from './account-row/account-row.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { AccountListComponent } from './account-list/account-list.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccountListComponent } from './account-list/account-list.component';
     CustomerInfoComponent,
     AccountRowComponent,
     AccountDetailComponent,
-    AccountListComponent
+    AccountListComponent,
+    TransactionListComponent
   ],
   imports: [
     BrowserModule,

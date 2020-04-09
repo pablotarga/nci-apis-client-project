@@ -9,7 +9,7 @@
       <fa-icon icon="times" (click)="s.activeAccount = null"></fa-icon>
     </div>
 
-    <span class="totals">{{account.balance | currency : 'EUR' }}</span>
+    <app-transaction-list [account]="account"></app-transaction-list>
   </div>
 
 </div>
