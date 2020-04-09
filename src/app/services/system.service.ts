@@ -12,10 +12,11 @@ export class SystemService {
   public customer = null;
   public accounts = [];
   public activeAccount = null;
+  public activeForm = null;
 
   constructor(
     private authApi: ApiAuthService
-  ) { }
+  ) { this.mock(); }
 
   login = (data: LoginForm) => {
     if (this.authenticating) {
@@ -68,6 +69,7 @@ export class SystemService {
     this.customer = null;
     this.accounts = [];
     this.activeAccount = null;
+    this.activeForm = null;
   }
 
   private loadAccounts = () => {
@@ -77,6 +79,15 @@ export class SystemService {
       return this.loading = false;
     }, 3000);
   }
+
+  private loadTransactions = (accountId) => {
+    this.loading = true;
+
+    setTimeout(() => {
+      return this.loading = false;
+    }, 3000);
+  }
+
 
   private mock() {
     this.customer = {
@@ -95,15 +106,29 @@ export class SystemService {
         number: '00001',
         balance: 34.56,
         title: 'Current Account',
+        transactions: [
+          { id: 123, accountId: 1, type: 'c', created: new Date(2020, 3, 1, 14, 34), amount: 200.00, postBalance: 200.00, description: 'Account opening' },
+          { id: 124, accountId: 1, type: 'c', created: new Date(2020, 3, 5, 14, 34), amount: 20.00, postBalance: 220.00, description: 'Lodgement' },
+          { id: 125, accountId: 1, type: 'd', created: new Date(2020, 3, 6, 10, 20), amount: 123.00, postBalance: 97.00, description: 'Withdrawal' },
+          { id: 126, accountId: 1, type: 'd', created: new Date(2020, 3, 7, 22, 0), amount: 15.00, postBalance: 84.00, description: 'Tesco Stores' },
+          { id: 126, accountId: 1, type: 'd', created: new Date(2020, 3, 9, 10, 0), amount: 49.44, postBalance: 34.56, description: 'Annual Subscription' },
+        ],
       },
       {
         id: 2,
         customerID: 1,
         sortCode: '90-30-66',
         number: '00002',
-        balance: 456.00,
+        balance: 402.34,
         title: 'Savings',
+        transactions: [
+          { id: 223, accountId: 2, type: 'c', created: new Date(2020, 1, 1, 10, 0), amount: 200.00, postBalance: 200.00, description: 'Deposit' },
+          { id: 224, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 200.00, postBalance: 400.00, description: 'Deposit' },
+          { id: 225, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 2.34, postBalance: 402.34, description: 'Interest' },
+        ],
       }
     ];
+
+    this.activeAccount = this.accounts[1];
   }
 }
