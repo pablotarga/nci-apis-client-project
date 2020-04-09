@@ -2,14 +2,14 @@
   <div class="card-body">
     <div class="d-flex justify-content-between">
       <h5 class="card-title">
-        {{account.title}}<br />
-        <small>{{account.sortCode}}</small>
-        <small class="ml-2">{{account.number}}</small>
+        {{acc.title}}<br />
+        <small>{{acc.sortCode}}</small>
+        <small class="ml-2">{{acc.number}}</small>
       </h5>
-      <fa-icon icon="times" (click)="s.activeAccount = null"></fa-icon>
+      <fa-icon icon="times" (click)="close()"></fa-icon>
     </div>
 
-    <app-transaction-list [account]="account"></app-transaction-list>
+    <app-transaction-list [account]="acc"></app-transaction-list>
   </div>
 
 </div>
