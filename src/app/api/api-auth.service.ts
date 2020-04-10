@@ -7,7 +7,7 @@ import { RegistrationForm } from '../interfaces/registration-form';
   providedIn: 'root'
 })
 export class ApiAuthService extends ApiService {
-  constructor(httpClient: HttpClient) { super(httpClient) }
+  constructor(httpClient: HttpClient) { super(httpClient); }
 
   login = (email: string, password: string) => this.post('login', { email, password });
   logout = () => this.delete('logout');

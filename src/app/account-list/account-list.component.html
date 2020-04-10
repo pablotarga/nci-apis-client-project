@@ -1,14 +1,22 @@
 <div class="card v-100 shadow mb-5">
   <div class="card-body">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mb-4">
       <h5 class="card-title">Accounts</h5>
       <fa-icon icon="plus"></fa-icon>
     </div>
-    <app-account-row [account]="acc" (click)="s.activeAccount = acc" *ngFor="let acc of s.accounts"></app-account-row>
 
-    <div class="account-row d-flex justify-content-between align-items-center py-4">
-      <div>&nbsp;</div>
-      <div class="balance">{{total | currency : 'EUR'}}</div>
+    <div class="account-row d-flex justify-content-between align-items-center py-2" (click)="s.activeAccount = acc" *ngFor="let acc of s.accounts">
+      <div>
+        {{acc.title}}<br />
+        <small class="text-muted">{{acc.sortCode}}</small>
+        <small class="text-muted ml-2">{{acc.number}}</small>
+      </div>
+      <div class="balance">{{acc.balance | currency : 'EUR'}}</div>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center py-2">
+      <div class="totals mr-3">Total</div>
+      <div class="totals">{{total | currency : 'EUR'}}</div>
     </div>
   </div>
 

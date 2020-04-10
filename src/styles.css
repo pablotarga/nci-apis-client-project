@@ -15,3 +15,23 @@ body{
 h5 + fa-icon{
   font-size: 1.5rem;
 }
+
+.clickable{
+  cursor: pointer;
+}
+
+
+.card.card-green{
+  background-color: #8fbc8f;
+  color: white;
+}
+
+.gutter-2.row {
+  margin-right: -0.25rem;
+  margin-left: -0.25rem;
+}
+
+.gutter-2 > [class^="col-"], .gutter-2 > [class^=" col-"] {
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+}

@@ -1,6 +1,6 @@
-<div class="card v-100 shadow mb-5">
+<div class="card card-green v-100 shadow mb-5">
   <div class="card-body">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mb-4">
       <h5 class="card-title">
         {{acc.title}}<br />
         <small>{{acc.sortCode}}</small>
@@ -9,7 +9,18 @@
       <fa-icon icon="times" (click)="close()"></fa-icon>
     </div>
 
-    <app-transaction-list [account]="acc"></app-transaction-list>
+    <div class="my-3 d-flex flex-column flex-sm-row">
+      <span [class.active]="showing == 'withdraw'" class="btn flex-fill btn-outline-light d-sm-inline mr-sm-2 mb-2 mb-sm-0" (click)="openForm('withdraw')">Withdraw</span>
+      <span [class.active]="showing == 'lodgement'" class="btn flex-fill btn-outline-light d-sm-inline mr-sm-2 mb-2 mb-sm-0" (click)="openForm('lodgement')">Lodgement</span>
+      <span [class.active]="showing == 'transfer'" class="btn flex-fill btn-outline-light d-sm-inline" (click)="openForm('transfer')">Transfer</span>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <app-transaction-list [account]="acc" [@switchForm]="showing == 'list' ? 'open' : 'closed'"></app-transaction-list>
+        <app-account-withdrawal [account]="acc" [@switchForm]="showing == 'withdraw' ? 'open' : 'closed'"></app-account-withdrawal>
+      </div>
+    </div>
   </div>
 
 </div>
