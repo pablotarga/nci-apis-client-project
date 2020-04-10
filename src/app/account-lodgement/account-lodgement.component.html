@@ -1,0 +1,30 @@
+<form [formGroup]="form" (submit)="submit()">
+
+  <div class="row gutter-2">
+    <div class="col-12 col-sm-6 py-1">
+      <label for="withdrawal-description">Description</label>
+      <input autocomplete="off" id="withdrawal-description" type="text" class="form-control" formControlName="description" placeholder="(optional)">
+    </div>
+
+    <div class="col-12 col-sm-6 py-1">
+      <label for="withdrawal-amount">Amount</label>
+      <input autocomplete="off" id="withdrawal-amount" type="text" class="form-control" formControlName="amount" placeholder="Amount">
+    </div>
+
+    <div class="col-12 py-3">
+      <span *ngIf="form.invalid && showErrors; else submitElement">
+        <button type="submit" class="btn btn-outline-danger" [class.disabled]="form.invalid">
+          Inform amount...
+        </button>
+      </span>
+      <ng-template #submitElement>
+        <button type="submit" class="btn btn-outline-light" [class.disabled]="form.invalid">
+          <fa-icon icon="euro-sign" class="mr-1"></fa-icon>
+          Lodge
+        </button>
+        <span (click)="close()" class="btn btn-link text-danger">Cancel</span>
+      </ng-template>
+    </div>
+  </div>
+
+</form>

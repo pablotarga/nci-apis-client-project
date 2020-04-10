@@ -16,6 +16,8 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { AccountListComponent } from './account-list/account-list.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { AccountWithdrawalComponent } from './account-withdrawal/account-withdrawal.component';
+import { AccountLodgementComponent } from './account-lodgement/account-lodgement.component';
+import { AccountTransferComponent } from './account-transfer/account-transfer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AccountWithdrawalComponent } from './account-withdrawal/account-withdra
     AccountDetailComponent,
     AccountListComponent,
     TransactionListComponent,
-    AccountWithdrawalComponent
+    AccountWithdrawalComponent,
+    AccountLodgementComponent,
+    AccountTransferComponent
   ],
   imports: [
     BrowserModule,

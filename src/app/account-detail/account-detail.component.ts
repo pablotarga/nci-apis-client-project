@@ -26,7 +26,30 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       ]),
 
       transition('closed => open', [
-        animate('300ms 10ms ease-out')
+        animate('600ms 10ms ease-out')
+      ]),
+    ]),
+    trigger('switchFormBoth', [
+      state('open', style({
+        opacity: 1,
+        height: '100%',
+        marginTop: '0',
+        display: 'block',
+      })),
+
+      state('closed', style({
+        opacity: 0,
+        height: 0,
+        marginTop: '1rem',
+        display: 'block',
+      })),
+
+      transition('open => closed', [
+        animate('300ms 0ms ease-out')
+      ]),
+
+      transition('closed => open', [
+        animate('600ms 0ms ease-out')
       ]),
     ])
   ]
@@ -65,5 +88,4 @@ export class AccountDetailComponent implements OnInit, OnChanges {
   public get showing(): string {
     return this.s.activeForm === null ? 'list' : this.s.activeForm;
   }
-
 }

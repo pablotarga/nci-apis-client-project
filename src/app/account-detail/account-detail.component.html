@@ -6,6 +6,7 @@
         <small>{{acc.sortCode}}</small>
         <small class="ml-2">{{acc.number}}</small>
       </h5>
+      <div class="ml-auto mr-3 totals" [@switchFormBoth]="showing == 'list' ? 'closed' : 'open'">{{acc.balance | currency : 'EUR'}}</div>
       <fa-icon icon="times" (click)="close()"></fa-icon>
     </div>
 
@@ -19,6 +20,8 @@
       <div class="col-12">
         <app-transaction-list [account]="acc" [@switchForm]="showing == 'list' ? 'open' : 'closed'"></app-transaction-list>
         <app-account-withdrawal [account]="acc" [@switchForm]="showing == 'withdraw' ? 'open' : 'closed'"></app-account-withdrawal>
+        <app-account-lodgement [account]="acc" [@switchForm]="showing == 'lodgement' ? 'open' : 'closed'"></app-account-lodgement>
+        <app-account-transfer [account]="acc" [@switchForm]="showing == 'transfer' ? 'open' : 'closed'"></app-account-transfer>
       </div>
     </div>
   </div>
