@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiAuthService } from '../api/api-auth.service';
 import { LoginForm } from '../interfaces/login-form';
 import { RegistrationForm } from '../interfaces/registration-form';
+import { ApiAccountService } from '../api/api-account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,29 @@ import { RegistrationForm } from '../interfaces/registration-form';
 export class SystemService {
   public authenticating = false;
   public loading = false;
+  public loadingAccounts = false;
   public customer = null;
   public accounts = [];
   public activeAccount = null;
   public activeForm = null;
 
   constructor(
-    private authApi: ApiAuthService
-  ) { this.mock(); }
+    private authApi: ApiAuthService,
+    private accApi: ApiAccountService
+
+  ) {
+    this.authenticating = true;
+    this.authApi.me().subscribe((e) => {
+      this.customer = e;
+      this.authenticating = false;
+      this.loadAccounts();
+    }, (err) => {
+      if (err.status === 0) {
+        this.mock();
+      }
+      this.authenticating = false;
+    });
+  }
 
   login = (data: LoginForm) => {
     if (this.authenticating) {
@@ -31,10 +47,6 @@ export class SystemService {
       this.loadAccounts();
       this.authenticating = false;
     }, (err) => {
-      if (err.status === 0) {
-        this.mock();
-      }
-
       this.authenticating = false;
     });
   }
@@ -52,12 +64,8 @@ export class SystemService {
       this.loadAccounts();
       this.authenticating = false;
     }, (err) => {
-      if (err.status === 0) {
-        this.mock();
-      }
-
       this.authenticating = false;
-    })
+    });
   }
 
   logout = () => {
@@ -73,11 +81,17 @@ export class SystemService {
   }
 
   private loadAccounts = () => {
-    this.loading = true;
+    if (this.loadingAccounts) {
+      return;
+    }
 
-    setTimeout(() => {
-      return this.loading = false;
-    }, 3000);
+    this.loadingAccounts = true;
+    this.accApi.index().subscribe((e) => {
+      this.accounts = e as any;
+      this.loadingAccounts = false;
+    }, (err) => {
+      this.loadingAccounts = false;
+    });
   }
 
   private loadTransactions = (accountId) => {
@@ -87,7 +101,6 @@ export class SystemService {
       return this.loading = false;
     }, 3000);
   }
-
 
   private mock() {
     this.customer = {

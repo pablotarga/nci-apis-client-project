@@ -1,4 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+*{
+  font-family: 'Comic Neue', cursive;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body{
   min-height: 100vh;
   /* background: linear-gradient(to top right, #1FA2FF 10%, #12D8FA 65%, #A6FFCB 125%) no-repeat; */
@@ -8,7 +15,7 @@ body{
 }
 
 .account-row .balance, .totals{
-  font-weight: 200;
+  font-weight: 300;
   font-size: 1.5rem;
 }
 
@@ -24,6 +31,7 @@ h5 + fa-icon{
 .card.card-green{
   background-color: #8fbc8f;
   color: white;
+  border-color: rgba(0,0,0,.125);
 }
 
 .gutter-2.row {
@@ -34,4 +42,8 @@ h5 + fa-icon{
 .gutter-2 > [class^="col-"], .gutter-2 > [class^=" col-"] {
   padding-right: 0.25rem;
   padding-left: 0.25rem;
+}
+
+.card{
+  border-color: #8fbc8f;
 }

@@ -29,8 +29,10 @@ export class AccountWithdrawalComponent extends AccountFormBaseComponent {
     }
     this.saving = true;
 
-    this.api.withdraw(this.acc.id, this.form.value).subscribe((e) => {
+    this.api.withdraw(this.acc.id, this.form.value).subscribe((e: any) => {
       console.log(e);
+      this.acc.balance = e.postBalance;
+      this.acc.transactions.push(e);
       this.close();
       this.saving = false;
     }, (err) => {

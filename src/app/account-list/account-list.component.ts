@@ -13,9 +13,15 @@ export class AccountListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   get total(): number {
-    return this.s.accounts.reduce((a, b) => a.balance + b.balance);
-  }
+    const list = (this.s.accounts || []);
 
+    if (list.length) {
+      return list.reduce((a, b) => {
+        return { balance: a.balance + b.balance };
+      }).balance;
+    } else {
+      return 0;
+    }
+  }
 }
