@@ -39,11 +39,25 @@ export class AuthorizedComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public get showing(): string {
+    if (this.s.activeAccount === null) {
+      return 'list';
+    } else if (!this.s.activeAccount.id) {
+      return 'new';
+    } else {
+      return 'details';
+    }
+  }
+
   public get accountDetailState(): string {
-    return (this.s.activeAccount !== null) ? 'open' : 'closed';
+    return this.showing === 'details' ? 'open' : 'closed';
   }
 
   public get accountsListState(): string {
-    return (this.s.activeAccount === null) ? 'open' : 'closed';
+    return this.showing === 'list' ? 'open' : 'closed';
+  }
+
+  public get accountsNewState(): string {
+    return this.showing === 'new' ? 'open' : 'closed';
   }
 }

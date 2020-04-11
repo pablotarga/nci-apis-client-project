@@ -4,6 +4,7 @@ import { SystemService } from '../services/system.service';
 import { Account } from '../interfaces/account';
 import { AccountFormBaseComponent } from '../account-form-base.component';
 import { ApiAccountService } from '../api/api-account.service';
+import { Transaction } from '../interfaces/transaction';
 
 @Component({
   selector: 'app-account-withdrawal',
@@ -29,14 +30,12 @@ export class AccountWithdrawalComponent extends AccountFormBaseComponent {
     }
     this.saving = true;
 
-    this.api.withdraw(this.acc.id, this.form.value).subscribe((e: any) => {
-      console.log(e);
+    this.api.withdraw(this.acc.id, this.form.value).subscribe((e: Transaction) => {
       this.acc.balance = e.postBalance;
       this.acc.transactions.push(e);
       this.close();
       this.saving = false;
     }, (err) => {
-      console.error(err);
       this.saving = false;
     });
 

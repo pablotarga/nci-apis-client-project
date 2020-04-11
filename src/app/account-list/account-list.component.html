@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex justify-content-between mb-4">
       <h5 class="card-title">Accounts</h5>
-      <fa-icon icon="plus"></fa-icon>
+      <fa-icon icon="plus" (click)="s.activeAccount = {}"></fa-icon>
     </div>
 
     <div class="account-row d-flex justify-content-between align-items-center py-2" (click)="s.activeAccount = acc" *ngFor="let acc of s.accounts">

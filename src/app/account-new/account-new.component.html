@@ -1,0 +1,27 @@
+<div class="card v-100 shadow mb-5">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <h5 class="card-title">
+        Add New Account
+      </h5>
+      <fa-icon icon="times" (click)="close()"></fa-icon>
+    </div>
+    <form [formGroup]="form" (submit)="submit()">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" autocomplete="off" formControlName="title" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="">Sort Code</label>
+        <input type="text" autocomplete="off" formControlName="sortCode" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-outline-success" [class.disabled]="form.invalid">Open Account</button>
+        <span class="btn btn-link text-danger" (click)="close()">Cancel</span>
+      </div>
+
+    </form>
+  </div>
+</div>
