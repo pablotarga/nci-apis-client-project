@@ -3,6 +3,7 @@ import { ApiAuthService } from '../api/api-auth.service';
 import { LoginForm } from '../interfaces/login-form';
 import { RegistrationForm } from '../interfaces/registration-form';
 import { ApiAccountService } from '../api/api-account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class SystemService {
 
   constructor(
     private authApi: ApiAuthService,
-    private accApi: ApiAccountService
+    private accApi: ApiAccountService,
+    private msg: ToastrService,
 
   ) {
     this.authenticating = true;
@@ -28,6 +30,7 @@ export class SystemService {
       this.loadAccounts();
     }, (err) => {
       if (err.status === 0) {
+        this.msg.warning('Server not responding activating FAKE data 🤪🤪🤪');
         this.mock();
       }
       this.authenticating = false;
@@ -42,11 +45,13 @@ export class SystemService {
     this.authenticating = true;
     this.clearAll();
 
-    this.authApi.login(data.email, data.password).subscribe(e => {
+    this.authApi.login(data.email, data.password).subscribe((e: any) => {
       this.customer = e;
       this.loadAccounts();
       this.authenticating = false;
+      this.msg.success('🤘 awesome!');
     }, (err) => {
+      this.msg.error('Invalid Email/Password 🚫');
       this.authenticating = false;
     });
   }
@@ -62,9 +67,11 @@ export class SystemService {
     this.authApi.register(data).subscribe((e) => {
       this.customer = e;
       this.loadAccounts();
+      this.msg.success('Welcome aboard 👨‍✈️');
       this.authenticating = false;
     }, (err) => {
       this.authenticating = false;
+      this.msg.error('Request not accepted 💩');
     });
   }
 

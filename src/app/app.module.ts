@@ -49,7 +49,8 @@ import { ToastrModule } from 'ngx-toastr';
       countDuplicates: true,
       resetTimeoutOnDuplicate: true,
       positionClass: 'toast-bottom-full-width',
-      progressBar: true
+      progressBar: true,
+      // disableTimeOut: true
     })
   ],
   providers: [],

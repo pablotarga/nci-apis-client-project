@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiAccountService } from '../api/api-account.service';
 import { SystemService } from '../services/system.service';
+import { ToastrService } from 'ngx-toastr';
+import { Account } from '../interfaces/account';
 
 @Component({
   selector: 'app-account-new',
@@ -15,7 +17,7 @@ export class AccountNewComponent implements OnInit {
   });
   loading = false;
 
-  constructor(private s: SystemService, private fb: FormBuilder, private api: ApiAccountService) { }
+  constructor(private s: SystemService, private fb: FormBuilder, private api: ApiAccountService, private msg: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -30,16 +32,31 @@ export class AccountNewComponent implements OnInit {
       return;
     }
 
+    if (this.form.invalid) {
+      const err = []
+
+      if (this.form.get('title').invalid) {
+        err.push('Title');
+      }
+
+      if (this.form.get('sortCode').invalid) {
+        err.push('Sort Code');
+      }
+
+      this.msg.error(`Please inform ${err.join(' and ')}`);
+      return;
+    }
+
     this.loading = true;
-    this.api.create(this.form.value).subscribe((e) => {
+    this.api.create(this.form.value).subscribe((e: Account) => {
       this.s.accounts.push(e);
       this.loading = false;
       this.close();
+      this.msg.info(`Account ${e.title} (${e.sortCode} ${e.number}) created`);
     }, (err) => {
+      this.msg.error('Request not accepted 💩');
       this.loading = false;
     });
-
-
   }
 
 }
