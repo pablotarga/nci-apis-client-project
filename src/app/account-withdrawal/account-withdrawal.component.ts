@@ -5,6 +5,7 @@ import { Account } from '../interfaces/account';
 import { AccountFormBaseComponent } from '../account-form-base.component';
 import { ApiAccountService } from '../api/api-account.service';
 import { Transaction } from '../interfaces/transaction';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-withdrawal',
@@ -17,11 +18,11 @@ export class AccountWithdrawalComponent extends AccountFormBaseComponent {
     description: ['']
   });
 
-  constructor(fb: FormBuilder, s: SystemService, private api: ApiAccountService) { super(fb, s); }
+  constructor(fb: FormBuilder, s: SystemService, msg: ToastrService, private api: ApiAccountService) { super(fb, s, msg); }
 
   submit() {
     if (this.form.invalid) {
-      this.checkValid();
+      this.checkValid('💸 Inform amount to withdraw.');
       return false;
     }
 
@@ -35,8 +36,10 @@ export class AccountWithdrawalComponent extends AccountFormBaseComponent {
       this.acc.transactions.push(e);
       this.close();
       this.saving = false;
+      this.msg.success('😎🎉 Money withdrawn');
     }, (err) => {
       this.saving = false;
+      this.msg.error('Request not accepted 💩');
     });
 
 

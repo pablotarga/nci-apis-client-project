@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 import { Account } from './interfaces/account';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SystemService } from './services/system.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-form-base',
@@ -11,12 +12,10 @@ import { SystemService } from './services/system.service';
 export class AccountFormBaseComponent implements OnInit, OnChanges {
   @Input() account: Account;
   acc: Account;
-  showErrors = false;
-  errorTimeout;
   saving = false;
   form: FormGroup;
 
-  constructor(protected fb: FormBuilder, protected s: SystemService) { }
+  constructor(protected fb: FormBuilder, protected s: SystemService, protected msg: ToastrService) { }
 
   ngOnInit(): void {
     this.acc = {} as Account;
@@ -34,12 +33,8 @@ export class AccountFormBaseComponent implements OnInit, OnChanges {
     this.s.activeForm = null;
   }
 
-  checkValid() {
-    this.showErrors = true;
-    clearTimeout(this.errorTimeout);
-    this.errorTimeout = setTimeout(() => {
-      this.showErrors = false;
-    }, 3000);
+  checkValid(msg) {
+    this.msg.error(msg);
   }
 
   submit() { }

@@ -12,18 +12,11 @@
     </div>
 
     <div class="col-12 py-3">
-      <span *ngIf="form.invalid && showErrors; else submitElement">
-        <button type="submit" class="btn btn-outline-danger" [class.disabled]="form.invalid">
-          Inform amount...
-        </button>
-      </span>
-      <ng-template #submitElement>
-        <button type="submit" class="btn btn-outline-light" [class.disabled]="form.invalid">
-          <fa-icon icon="euro-sign" class="mr-1"></fa-icon>
-          Lodge
-        </button>
-        <span (click)="close()" class="btn btn-link text-danger">Cancel</span>
-      </ng-template>
+      <button type="submit" class="btn btn-outline-light" [class.disabled]="form.invalid">
+        <fa-icon icon="euro-sign" class="mr-1"></fa-icon>
+        Lodge
+      </button>
+      <span (click)="close()" class="btn btn-link text-danger">Cancel</span>
     </div>
   </div>
 

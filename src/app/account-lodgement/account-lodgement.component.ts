@@ -3,6 +3,7 @@ import { AccountFormBaseComponent } from '../account-form-base.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SystemService } from '../services/system.service';
 import { ApiAccountService } from '../api/api-account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-lodgement',
@@ -15,12 +16,12 @@ export class AccountLodgementComponent extends AccountFormBaseComponent {
     description: ['']
   });
 
-  constructor(fb: FormBuilder, s: SystemService, private api: ApiAccountService) { super(fb, s); }
+  constructor(fb: FormBuilder, s: SystemService, msg: ToastrService, private api: ApiAccountService) { super(fb, s, msg); }
 
 
   submit() {
     if (this.form.invalid) {
-      this.checkValid();
+      this.checkValid('🤑 Inform amount to lodge.');
       return false;
     }
 
@@ -35,9 +36,11 @@ export class AccountLodgementComponent extends AccountFormBaseComponent {
       this.acc.transactions.push(e);
       this.close();
       this.saving = false;
+      this.msg.success('🎉 Money lodged');
     }, (err) => {
       console.error(err);
       this.saving = false;
+      this.msg.error('Request not accepted 💩');
     });
   }
 

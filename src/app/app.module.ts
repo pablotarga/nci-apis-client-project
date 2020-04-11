@@ -20,6 +20,9 @@ import { AccountLodgementComponent } from './account-lodgement/account-lodgement
 import { AccountTransferComponent } from './account-transfer/account-transfer.component';
 import { AccountNewComponent } from './account-new/account-new.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,14 @@ import { AccountNewComponent } from './account-new/account-new.component';
     BrowserAnimationsModule,
     FontAwesomeModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      countDuplicates: true,
+      resetTimeoutOnDuplicate: true,
+      positionClass: 'toast-bottom-full-width',
+      progressBar: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
