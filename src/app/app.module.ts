@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 import { AuthorizedComponent } from './authorized/authorized.component';
 import { LoginComponent } from './login/login.component';
@@ -50,7 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
       resetTimeoutOnDuplicate: true,
       positionClass: 'toast-bottom-full-width',
       progressBar: true,
-      // disableTimeOut: true
+      // disableTimeOut: true,
     })
   ],
   providers: [],
@@ -58,6 +59,6 @@ import { ToastrModule } from 'ngx-toastr';
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas);
+    library.addIconPacks(fas, far);
   }
 }

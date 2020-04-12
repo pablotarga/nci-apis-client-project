@@ -7,30 +7,45 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   templateUrl: './authorized.component.html',
   styleUrls: ['./authorized.component.scss'],
   animations: [
-    // the fade-in/fade-out animation.
-    trigger('fadeInOut', [
-
-      state('open', style({
-        opacity: 1,
-        display: 'block',
-        transform: 'translateY(0)',
-      })),
-
-      state('closed', style({
-        opacity: 0,
-        height: 0,
-        display: 'block',
-        transform: 'translateY(5rem)',
-      })),
-
-      transition('open => closed', [
-        animate('100ms 0ms ease-out')
-      ]),
-
-      transition('closed => open', [
-        animate('600ms 100ms ease-out')
-      ]),
+    trigger('inOutAnimation', [
+      transition(
+        ':enter',
+        [
+          style({
+            opacity: 0,
+            height: 0,
+            display: 'block',
+            transform: 'translateY(1rem)'
+          }),
+          animate('600ms 200ms ease-out',
+            style({
+              opacity: 1,
+              display: 'block',
+              transform: 'translateY(0)',
+            })
+          )
+        ]
+      ),
+      transition(
+        ':leave',
+        [
+          style({
+            opacity: 1,
+            display: 'block',
+            transform: 'translateY(0)',
+          }),
+          animate('200ms 0s ease-in',
+            style({
+              height: 0,
+              opacity: 0,
+              // display: 'block',
+              transform: 'translateY(-1rem)',
+            })
+          )
+        ]
+      )
     ])
+
   ]
 })
 export class AuthorizedComponent implements OnInit {

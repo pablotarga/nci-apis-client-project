@@ -4,8 +4,8 @@
   </div>
 
   <div class="col-md-7 col-lg-9 mt-4 mt-md-0">
-    <app-account-list [@fadeInOut]="accountsListState"></app-account-list>
-    <app-account-detail [account]="s.activeAccount" [@fadeInOut]="accountDetailState"></app-account-detail>
-    <app-account-new [@fadeInOut]="accountsNewState"></app-account-new>
+    <app-account-list *ngIf="accountsListState == 'open'" [@inOutAnimation]></app-account-list>
+    <app-account-detail *ngIf="accountDetailState == 'open'" [@inOutAnimation] [account]="s.activeAccount"></app-account-detail>
+    <app-account-new *ngIf="accountsNewState == 'open'" [@inOutAnimation]></app-account-new>
   </div>
 </div>

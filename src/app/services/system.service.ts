@@ -78,6 +78,7 @@ export class SystemService {
   logout = () => {
     this.authApi.logout().subscribe(e => console.log('Logged out!'));
     this.clearAll();
+    this.msg.info('Your cookie was destroyed');
   }
 
   private clearAll = () => {
@@ -146,6 +147,24 @@ export class SystemService {
           { id: 224, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 200.00, postBalance: 400.00, description: 'Deposit' },
           { id: 225, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 2.34, postBalance: 402.34, description: 'Interest' },
         ],
+      },
+      {
+        id: 3,
+        customerID: 1,
+        sortCode: '90-30-66',
+        number: '00003',
+        balance: 4024.68,
+        title: 'Investments',
+        transactions: [],
+      },
+      {
+        id: 4,
+        customerID: 1,
+        sortCode: '90-30-66',
+        number: '00004',
+        balance: 76.34,
+        title: 'Other',
+        transactions: [],
       }
     ];
 

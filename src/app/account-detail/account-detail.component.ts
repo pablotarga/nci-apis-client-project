@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges, ElementRef } from '@angular/core';
 import { Account } from '../interfaces/account';
 import { SystemService } from '../services/system.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -8,67 +8,82 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   templateUrl: './account-detail.component.html',
   styleUrls: ['./account-detail.component.scss'],
   animations: [
-    trigger('switchForm', [
-      state('open', style({
-        opacity: 1,
-        height: '100%',
-        display: 'block',
-      })),
-
-      state('closed', style({
-        opacity: 0,
-        height: 0,
-        display: 'block',
-      })),
-
-      transition('open => closed', [
-        animate('10ms 0ms ease-out')
-      ]),
-
-      transition('closed => open', [
-        animate('600ms 10ms ease-out')
-      ]),
+    trigger('contentAnimation', [
+      transition(
+        ':enter',
+        [
+          style({
+            opacity: 0,
+            height: 0,
+            display: 'block',
+          }),
+          animate('400ms 200ms ease',
+            style({
+              opacity: 1,
+              display: 'block',
+            })
+          )
+        ]
+      ),
+      transition(
+        ':leave',
+        [
+          style({
+            opacity: 1,
+            display: 'block',
+          }),
+          animate('200ms 0s ease',
+            style({
+              height: 0,
+              opacity: 0,
+            })
+          )
+        ]
+      )
     ]),
-    trigger('switchFormBoth', [
-      state('open', style({
-        opacity: 1,
-        height: '100%',
-        marginTop: '0',
-        display: 'block',
-      })),
 
-      state('closed', style({
-        opacity: 0,
-        height: 0,
-        marginTop: '1rem',
-        display: 'block',
-      })),
+    trigger('balanceTip', [
+      transition(
+        ':enter',
+        [
+          style({
+            opacity: 0,
+            display: 'block',
+          }),
+          animate('600ms 0ms ease',
+            style({
+              opacity: 1,
+              display: 'block',
+            })
+          )
+        ]
+      ),
+      transition(
+        ':leave',
+        [
+          style({
+            opacity: 1,
+          }),
+          animate('600ms 0s ease',
+            style({
+              opacity: 0,
+            })
+          )
+        ]
+      )
+    ]),
 
-      transition('open => closed', [
-        animate('300ms 0ms ease-out')
-      ]),
 
-      transition('closed => open', [
-        animate('600ms 0ms ease-out')
-      ]),
-    ])
   ]
 })
-export class AccountDetailComponent implements OnInit, OnChanges {
+export class AccountDetailComponent implements OnInit {
   @Input() account: Account;
   acc: Account;
 
   constructor(public s: SystemService) { }
 
   ngOnInit(): void {
-    this.acc = {} as Account;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const account: SimpleChange = changes.account;
-    if (account.currentValue) {
-      this.acc = account.currentValue;
-    }
+    this.acc = this.account;
   }
 
   close() {
@@ -77,6 +92,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
   }
 
   openForm(name) {
+
     if (this.s.activeForm === name) {
       this.s.activeForm = null;
     } else {
