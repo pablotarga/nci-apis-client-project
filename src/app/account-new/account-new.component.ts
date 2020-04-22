@@ -33,7 +33,7 @@ export class AccountNewComponent implements OnInit {
     }
 
     if (this.form.invalid) {
-      const err = []
+      const err = [];
 
       if (this.form.get('title').invalid) {
         err.push('Title');
@@ -52,7 +52,7 @@ export class AccountNewComponent implements OnInit {
       this.s.accounts.push(e);
       this.loading = false;
       this.close();
-      this.msg.info(`Account ${e.title} (${e.sortCode} ${e.number}) created`);
+      this.msg.info(`${e.title} created! Sort Code ${e.sortCode} no. ${e.number}`);
     }, (err) => {
       this.msg.error('Request not accepted 💩');
       this.loading = false;

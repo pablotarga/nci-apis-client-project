@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { SystemService } from '../services/system.service';
-import { Account } from '../interfaces/account';
 import { AccountFormBaseComponent } from '../account-form-base.component';
 import { ApiAccountService } from '../api/api-account.service';
 import { Transaction } from '../interfaces/transaction';
@@ -31,19 +30,16 @@ export class AccountWithdrawalComponent extends AccountFormBaseComponent {
     }
     this.saving = true;
 
-    this.api.withdraw(this.acc.id, this.form.value).subscribe((e: Transaction) => {
-      this.acc.balance = e.postBalance;
-      this.acc.transactions.push(e);
-      this.close();
-      this.saving = false;
+    this.api.withdraw(this.account.id, this.form.value).subscribe((e: Transaction) => {
+      this.account.balance = e.postBalance;
+      this.account.transactions.push(e);
       this.msg.success('😎🎉 Money withdrawn');
+      this.saving = false;
+      this.close();
     }, (err) => {
       this.saving = false;
       this.msg.error('Request not accepted 💩');
     });
-
-
-
   }
 
 }

@@ -63,16 +63,4 @@ export class AuthorizedComponent implements OnInit {
       return 'details';
     }
   }
-
-  public get accountDetailState(): string {
-    return this.showing === 'details' ? 'open' : 'closed';
-  }
-
-  public get accountsListState(): string {
-    return this.showing === 'list' ? 'open' : 'closed';
-  }
-
-  public get accountsNewState(): string {
-    return this.showing === 'new' ? 'open' : 'closed';
-  }
 }

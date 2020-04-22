@@ -30,15 +30,13 @@ export class AccountLodgementComponent extends AccountFormBaseComponent {
     }
     this.saving = true;
 
-    this.api.lodge(this.acc.id, this.form.value).subscribe((e: any) => {
-      console.log(e);
-      this.acc.balance = e.postBalance;
-      this.acc.transactions.push(e);
-      this.close();
-      this.saving = false;
+    this.api.lodge(this.account.id, this.form.value).subscribe((e: any) => {
+      this.account.balance = e.postBalance;
+      this.account.transactions.push(e);
       this.msg.success('🎉 Money lodged');
+      this.saving = false;
+      this.close();
     }, (err) => {
-      console.error(err);
       this.saving = false;
       this.msg.error('Request not accepted 💩');
     });

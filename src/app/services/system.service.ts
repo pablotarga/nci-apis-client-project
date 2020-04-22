@@ -3,7 +3,10 @@ import { ApiAuthService } from '../api/api-auth.service';
 import { LoginForm } from '../interfaces/login-form';
 import { RegistrationForm } from '../interfaces/registration-form';
 import { ApiAccountService } from '../api/api-account.service';
+import { ApiTransactionService } from '../api/api-transaction.service';
 import { ToastrService } from 'ngx-toastr';
+import { Transaction } from '../interfaces/transaction';
+import { Account } from '../interfaces/account';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,8 @@ export class SystemService {
   public authenticating = false;
   public loading = false;
   public loadingAccounts = false;
+  public loadingTransactions = false;
+
   public customer = null;
   public accounts = [];
   public activeAccount = null;
@@ -20,6 +25,7 @@ export class SystemService {
   constructor(
     private authApi: ApiAuthService,
     private accApi: ApiAccountService,
+    private transactionApi: ApiTransactionService,
     private msg: ToastrService,
 
   ) {
@@ -81,6 +87,30 @@ export class SystemService {
     this.msg.info('Your cookie was destroyed');
   }
 
+  addTransaction(t: Transaction) {
+    if (t == null) {
+      return;
+    }
+
+    const acc = this.findAccountById(t.accountID);
+    if (acc == null) {
+      return;
+    }
+
+    acc.balance = t.postBalance;
+    acc.transactions.push(t);
+  }
+
+  private findAccountById(id: number): Account {
+    for (const acc of this.accounts) {
+      if (+acc.id === +id) {
+        return acc;
+      }
+    }
+
+    return null;
+  }
+
   private clearAll = () => {
     this.customer = null;
     this.accounts = [];
@@ -102,9 +132,23 @@ export class SystemService {
     });
   }
 
-  private loadTransactions = (accountId) => {
-    this.loading = true;
-
+  public loadTransactions = () => {
+    if (this.loadingTransactions || this.activeAccount == null) {
+      return;
+    }
+    this.loadingTransactions = true;
+    const accountId = this.activeAccount.id
+    this.transactionApi.index(accountId).subscribe((e: Transaction[]) => {
+      this.loadingTransactions = false;
+      if (e) {
+        const acc = this.findAccountById(accountId);
+        if (acc) {
+          acc.transactions = e;
+        }
+      }
+    }, (err) => {
+      this.loadingTransactions = false;
+    });
     setTimeout(() => {
       return this.loading = false;
     }, 3000);
@@ -128,11 +172,11 @@ export class SystemService {
         balance: 34.56,
         title: 'Current Account',
         transactions: [
-          { id: 123, accountId: 1, type: 'c', created: new Date(2020, 3, 1, 14, 34), amount: 200.00, postBalance: 200.00, description: 'Account opening' },
-          { id: 124, accountId: 1, type: 'c', created: new Date(2020, 3, 5, 14, 34), amount: 20.00, postBalance: 220.00, description: 'Lodgement' },
-          { id: 125, accountId: 1, type: 'd', created: new Date(2020, 3, 6, 10, 20), amount: 123.00, postBalance: 97.00, description: 'Withdrawal' },
-          { id: 126, accountId: 1, type: 'd', created: new Date(2020, 3, 7, 22, 0), amount: 15.00, postBalance: 84.00, description: 'Tesco Stores' },
-          { id: 126, accountId: 1, type: 'd', created: new Date(2020, 3, 9, 10, 0), amount: 49.44, postBalance: 34.56, description: 'Annual Subscription' },
+          { id: 123, accountID: 1, type: 'c', created: new Date(2020, 3, 1, 14, 34), amount: 200.00, postBalance: 200.00, description: 'Account opening' },
+          { id: 124, accountID: 1, type: 'c', created: new Date(2020, 3, 5, 14, 34), amount: 20.00, postBalance: 220.00, description: 'Lodgement' },
+          { id: 125, accountID: 1, type: 'd', created: new Date(2020, 3, 6, 10, 20), amount: 123.00, postBalance: 97.00, description: 'Withdrawal' },
+          { id: 126, accountID: 1, type: 'd', created: new Date(2020, 3, 7, 22, 0), amount: 15.00, postBalance: 84.00, description: 'Tesco Stores' },
+          { id: 126, accountID: 1, type: 'd', created: new Date(2020, 3, 9, 10, 0), amount: 49.44, postBalance: 34.56, description: 'Annual Subscription' },
         ],
       },
       {
@@ -143,9 +187,9 @@ export class SystemService {
         balance: 402.34,
         title: 'Savings',
         transactions: [
-          { id: 223, accountId: 2, type: 'c', created: new Date(2020, 1, 1, 10, 0), amount: 200.00, postBalance: 200.00, description: 'Deposit' },
-          { id: 224, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 200.00, postBalance: 400.00, description: 'Deposit' },
-          { id: 225, accountId: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 2.34, postBalance: 402.34, description: 'Interest' },
+          { id: 223, accountID: 2, type: 'c', created: new Date(2020, 1, 1, 10, 0), amount: 200.00, postBalance: 200.00, description: 'Deposit' },
+          { id: 224, accountID: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 200.00, postBalance: 400.00, description: 'Deposit' },
+          { id: 225, accountID: 2, type: 'c', created: new Date(2020, 2, 1, 10, 0), amount: 2.34, postBalance: 402.34, description: 'Interest' },
         ],
       },
       {

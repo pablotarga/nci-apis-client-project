@@ -1,7 +1,8 @@
-<div class="account-row d-flex justify-content-between align-items-center py-2" *ngFor="let entry of account.transactions">
+<div class="account-row d-flex justify-content-between align-items-center py-2" *ngFor="let entry of account.transactions" (click)="refresh(entry)">
   <div>
     {{entry.description}}<br />
     <small class="text-white">{{entry.created | date : 'dd/LL/yyyy HH:mm' }}</small>
+    <small *ngIf="entry.pingedAt" class="ml-3 text-white">(pinged at: {{entry.pingedAt | date : 'dd/LL/yyyy HH:mm:ss' }})</small>
   </div>
   <div class="text-right">
     <span class="balance" [class.text-danger]="entry.type == 'd'">

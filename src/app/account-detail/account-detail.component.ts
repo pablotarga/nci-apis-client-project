@@ -2,6 +2,8 @@ import { Component, OnInit, Input, SimpleChanges, SimpleChange, OnChanges, Eleme
 import { Account } from '../interfaces/account';
 import { SystemService } from '../services/system.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ApiTransactionService } from '../api/api-transaction.service';
+import { Transaction } from '../interfaces/transaction';
 
 @Component({
   selector: 'app-account-detail',
@@ -80,10 +82,11 @@ export class AccountDetailComponent implements OnInit {
   @Input() account: Account;
   acc: Account;
 
-  constructor(public s: SystemService) { }
+  constructor(public s: SystemService, private api: ApiTransactionService) { }
 
   ngOnInit(): void {
     this.acc = this.account;
+    this.s.loadTransactions();
   }
 
   close() {
